@@ -1,0 +1,259 @@
+/* Main Styles for HDIMS */
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+/* Login Card */
+.login-card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Sidebar Styles */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.sidebar.active {
+    margin-left: -250px;
+}
+
+.sidebar .sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar ul.components {
+    padding: 20px 0;
+}
+
+.sidebar ul li a {
+    padding: 12px 20px;
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 4px 10px;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li.active > a {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar ul li a i {
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.sidebar .sidebar-user-info {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar .user-info img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+/* Content Styles */
+#content {
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#content.active {
+    width: 100%;
+}
+
+/* When sidebar is collapsed */
+@media (max-width: 768px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+    .sidebar.active {
+        margin-left: 0;
+    }
+    #content {
+        width: 100%;
+    }
+    #content.active {
+        width: calc(100% - 250px);
+    }
+}
+
+/* Dashboard Sections */
+.content-section {
+    display: none;
+    padding: 30px 0;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.section-title {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dashboard Cards */
+.widget-card {
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.widget-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+.widget-icon {
+    opacity: 0.8;
+}
+
+/* Timeline Component */
+.timeline {
+    position: relative;
+    padding-left: 30px;
+    list-style: none;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-marker {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    left: -30px;
+    top: 5px;
+}
+
+.timeline-content {
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Appointment Calendar */
+.appointment-calendar th, 
+.appointment-calendar td {
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+}
+
+.appointment-calendar .calendar-time {
+    font-weight: bold;
+}
+
+.appointment-slot {
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.appointment-slot.available {
+    background-color: rgba(25, 135, 84, 0.2);
+    cursor: pointer;
+}
+
+.appointment-slot.available:hover {
+    background-color: rgba(25, 135, 84, 0.4);
+}
+
+.appointment-slot.booked {
+    background-color: rgba(220, 53, 69, 0.2);
+}
+
+.appointment-slot.selected {
+    background-color: rgba(13, 110, 253, 0.4);
+    border: 2px solid #0d6efd;
+}
+
+/* Form Styles */
+.form-floating > label {
+    color: #6c757d;
+}
+
+/* Notification Icon */
+.notification-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #dc3545;
+    display: none;
+}
+
+.notification-icon.has-notifications::after {
+    display: block;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}

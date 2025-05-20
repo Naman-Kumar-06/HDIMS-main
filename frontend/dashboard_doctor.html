@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - HDIMS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar bg-dark">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-heartbeat me-2"></i>HDIMS</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="sidebar-user-info">
+                    <div class="user-info">
+                        <img id="user-avatar" src="https://via.placeholder.com/50" class="rounded-circle" alt="User">
+                        <div>
+                            <h6 id="user-name">Loading...</h6>
+                            <span class="badge bg-primary">Doctor</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="active">
+                    <a href="#dashboard-section" data-section="dashboard-section">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#appointments-section" data-section="appointments-section">
+                        <i class="fas fa-calendar-check me-2"></i>Appointments
+                    </a>
+                </li>
+                <li>
+                    <a href="#patients-section" data-section="patients-section">
+                        <i class="fas fa-user-injured me-2"></i>My Patients
+                    </a>
+                </li>
+                <li>
+                    <a href="#schedule-section" data-section="schedule-section">
+                        <i class="fas fa-clock me-2"></i>Schedule
+                    </a>
+                </li>
+                <li>
+                    <a href="#performance-section" data-section="performance-section">
+                        <i class="fas fa-chart-line me-2"></i>Performance
+                    </a>
+                </li>
+                <li>
+                    <a href="#profile-section" data-section="profile-section">
+                        <i class="fas fa-user-cog me-2"></i>Profile Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="logout-btn">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <span class="navbar-text ms-auto">
+                        <i class="fas fa-bell me-3 notification-icon"></i>
+                        <span id="current-date">Loading date...</span>
+                    </span>
+                </div>
+            </nav>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="container-fluid">
+                    <h2 class="section-title">Doctor Dashboard</h2>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card mb-4 widget-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title text-muted">Today's Appointments</h6>
+                                            <h2 id="today-appointments" class="mb-0">-</h2>
+                                        </div>
+                                        <div class="widget-icon text-info">
+                                            <i class="fas fa-calendar-day fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#appointments-section" class="stretched-link" data-section="appointments-section"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card mb-4 widget-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title text-muted">Total Patients</h6>
+                                            <h2 id="total-patients" class="mb-0">-</h2>
+                                        </div>
+                                        <div class="widget-icon text-primary">
+                                            <i class="fas fa-user-injured fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#patients-section" class="stretched-link" data-section="patients-section"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card mb-4 widget-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title text-muted">Completion Rate</h6>
+                                            <h2 id="completion-rate" class="mb-0">-%</h2>
+                                        </div>
+                                        <div class="widget-icon text-success">
+                                            <i class="fas fa-check-circle fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#performance-section" class="stretched-link" data-section="performance-section"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card mb-4 widget-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title text-muted">Satisfaction Score</h6>
+                                            <h2 id="satisfaction-score" class="mb-0">-</h2>
+                                        </div>
+                                        <div class="widget-icon text-warning">
+                                            <i class="fas fa-star fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#performance-section" class="stretched-link" data-section="performance-section"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Next Appointments</h5>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="today-filter">Today</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary active" id="week-filter">This Week</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Time</th>
+                                                    <th>Patient</th>
+                                                    <th>Reason</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="next-appointments">
+                                                <tr>
+                                                    <td colspan="5" class="text-center">Loading appointments...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Urgent Cases</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush" id="urgent-cases">
+                                        <li class="list-group-item">
+                                            <div class="placeholder-content">Loading urgent cases...</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Weekly Schedule</h5>
+                                </div>
+                                <div class="card-body p-0">
+                                    <ul class="list-group list-group-flush" id="weekly-schedule">
+                                        <li class="list-group-item">
+                                            <div class="placeholder-content">Loading schedule...</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Appointment Analytics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="appointmentAnalyticsChart" height="100"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+            <section id="appointments-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">Appointment Management</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Appointment Calendar</h5>
+                                    <div>
+                                        <button class="btn btn-outline-primary me-1" id="prev-week">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <span id="current-week-range">Loading...</span>
+                                        <button class="btn btn-outline-primary ms-1" id="next-week">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered appointment-calendar">
+                                            <thead>
+                                                <tr id="calendar-header">
+                                                    <th class="text-center" style="width: 8%">Time</th>
+                                                    <th class="text-center">Monday</th>
+                                                    <th class="text-center">Tuesday</th>
+                                                    <th class="text-center">Wednesday</th>
+                                                    <th class="text-center">Thursday</th>
+                                                    <th class="text-center">Friday</th>
+                                                    <th class="text-center">Saturday</th>
+                                                    <th class="text-center">Sunday</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="calendar-body">
+                                                <tr>
+                                                    <td colspan="8" class="text-center py-4">Loading calendar...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs" id="appointment-tabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="true">Scheduled</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed" type="button" role="tab" aria-controls="completed" aria-selected="false">Completed</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="cancelled-tab" data-bs-toggle="tab" data-bs-target="#cancelled" type="button" role="tab" aria-controls="cancelled" aria-selected="false">Cancelled</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="appointmentTabContent">
+                                        <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date & Time</th>
+                                                            <th>Patient</th>
+                                                            <th>Reason</th>
+                                                            <th>Urgency</th>
+                                                            <th>Status</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="scheduled-appointments">
+                                                        <tr>
+                                                            <td colspan="6" class="text-center">Loading appointments...</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date & Time</th>
+                                                            <th>Patient</th>
+                                                            <th>Reason</th>
+                                                            <th>Notes</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="completed-appointments">
+                                                        <tr>
+                                                            <td colspan="5" class="text-center">Loading appointments...</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date & Time</th>
+                                                            <th>Patient</th>
+                                                            <th>Reason</th>
+                                                            <th>Reason for Cancellation</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="doctor-cancelled-appointments">
+                                                        <tr>
+                                                            <td colspan="5" class="text-center">Loading appointments...</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patients Section -->
+            <section id="patients-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">My Patients</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Patient Search</h5>
+                                    <div class="input-group" style="max-width: 300px;">
+                                        <input type="text" class="form-control" placeholder="Search patients..." id="patient-search">
+                                        <button class="btn btn-primary" type="button" id="search-patient-btn">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="search-results" class="d-none">
+                                        <h6 class="border-bottom pb-2 mb-3">Search Results</h6>
+                                        <div id="patient-search-results"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Patient List</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Gender</th>
+                                                    <th>Contact</th>
+                                                    <th>Last Visit</th>
+                                                    <th>Appointments</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="patient-list">
+                                                <tr>
+                                                    <td colspan="6" class="text-center">Loading patients...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav aria-label="Patient pagination">
+                                            <ul class="pagination justify-content-center" id="patient-pagination">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schedule Section -->
+            <section id="schedule-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">My Schedule</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Availability Settings</h5>
+                                    <button class="btn btn-primary btn-sm" id="edit-availability-btn">
+                                        <i class="fas fa-edit me-1"></i> Edit Availability
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div id="availability-display" class="mb-3">
+                                        <p id="current-availability">Loading availability...</p>
+                                    </div>
+                                    <div id="availability-edit" class="d-none">
+                                        <form id="availability-form">
+                                            <div class="mb-3">
+                                                <label for="availability-text" class="form-label">Set your regular working hours</label>
+                                                <textarea class="form-control" id="availability-text" rows="5" placeholder="e.g., Monday-Friday: 9AM-5PM, Saturday: 9AM-1PM, Sunday: Unavailable"></textarea>
+                                                <div class="form-text">Clearly specify your working days and hours for patient appointment scheduling.</div>
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">Save Availability</button>
+                                                <button type="button" class="btn btn-secondary" id="cancel-availability-btn">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Block Time Slots</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="block-time-form" class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="block-date" class="form-label">Date</label>
+                                            <input type="date" class="form-control" id="block-date" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="block-start-time" class="form-label">Start Time</label>
+                                            <input type="time" class="form-control" id="block-start-time" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="block-end-time" class="form-label">End Time</label>
+                                            <input type="time" class="form-control" id="block-end-time" required>
+                                        </div>
+                                        <div class="col-md-2 d-flex align-items-end">
+                                            <button type="submit" class="btn btn-primary w-100">Block Time</button>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="block-reason" class="form-label">Reason (Optional)</label>
+                                            <input type="text" class="form-control" id="block-reason" placeholder="e.g., Personal leave, Conference, etc.">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Blocked Time Slots</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Start Time</th>
+                                                    <th>End Time</th>
+                                                    <th>Reason</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="blocked-slots">
+                                                <tr>
+                                                    <td colspan="5" class="text-center">No blocked time slots found.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance Section -->
+            <section id="performance-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">Performance Metrics</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Patient Satisfaction</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="satisfactionChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Appointments by Status</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="appointmentStatusChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Average Response Time</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="responseTimeChart" height="100"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Monthly Performance Summary</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Month</th>
+                                                    <th>Patients Seen</th>
+                                                    <th>Appointments Completed</th>
+                                                    <th>Avg. Response Time</th>
+                                                    <th>Satisfaction Score</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="performance-summary">
+                                                <tr>
+                                                    <td colspan="5" class="text-center">Loading performance data...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">Profile Settings</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Doctor Information</h5>
+                                </div>
+                                <div class="card-body text-center">
+                                    <img src="https://pixabay.com/get/g4bcbf9c4c9e36789fdc15d3f34929a4ceceb2d1838959d3bad0509c86a1552c04574d493598051cdc0fb1169331df451d60ba592bbaa848b106e04ac22d8723f_1280.jpg" class="rounded-circle mb-3" alt="Profile Picture" id="doctor-profile-picture" style="width: 150px; height: 150px; object-fit: cover;">
+                                    <h5 id="doctor-profile-name">Loading...</h5>
+                                    <p id="doctor-profile-specialization" class="mb-1">Loading...</p>
+                                    <p class="text-muted" id="doctor-profile-email">Loading...</p>
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary" id="edit-doctor-profile-btn">
+                                            <i class="fas fa-edit me-1"></i> Edit Profile
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-8">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Edit Profile Information</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="doctor-profile-form">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="doctor-full-name" class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" id="doctor-full-name" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="doctor-specialization-edit" class="form-label">Specialization</label>
+                                                <select class="form-select" id="doctor-specialization-edit" required>
+                                                    <option value="Cardiology">Cardiology</option>
+                                                    <option value="Dermatology">Dermatology</option>
+                                                    <option value="Neurology">Neurology</option>
+                                                    <option value="Orthopedics">Orthopedics</option>
+                                                    <option value="Pediatrics">Pediatrics</option>
+                                                    <option value="Psychiatry">Psychiatry</option>
+                                                    <option value="Oncology">Oncology</option>
+                                                    <option value="General Medicine">General Medicine</option>
+                                                    <option value="Surgery">Surgery</option>
+                                                    <option value="Gynecology">Gynecology</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="doctor-contact-edit" class="form-label">Contact Number</label>
+                                            <input type="tel" class="form-control" id="doctor-contact-edit" required>
+                                        </div>
+                                        
+                                        <div class="d-grid gap-2">
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Change Password</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="doctor-password-form">
+                                        <div class="mb-3">
+                                            <label for="doctor-current-password" class="form-label">Current Password</label>
+                                            <input type="password" class="form-control" id="doctor-current-password" required>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="doctor-new-password" class="form-label">New Password</label>
+                                            <input type="password" class="form-control" id="doctor-new-password" required>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="doctor-confirm-password" class="form-label">Confirm New Password</label>
+                                            <input type="password" class="form-control" id="doctor-confirm-password" required>
+                                        </div>
+                                        
+                                        <div class="d-grid gap-2">
+                                            <button type="submit" class="btn btn-primary">Update Password</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modal for Appointment Details -->
+    <div class="modal fade" id="appointmentDetailModal" tabindex="-1" aria-labelledby="appointmentDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="appointmentDetailModalLabel">Appointment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="appointment-detail-content">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Loading appointment details...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="complete-appointment-btn">Mark as Completed</button>
+                    <button type="button" class="btn btn-danger" id="cancel-appointment-modal-btn">Cancel Appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Patient Details -->
+    <div class="modal fade" id="patientDetailModal" tabindex="-1" aria-labelledby="patientDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="patientDetailModalLabel">Patient Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="patient-detail-content">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Loading patient details...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="schedule-for-patient-btn">Schedule Appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/auth.js"></script>
+    <script src="js/doctor.js"></script>
+</body>
+</html>

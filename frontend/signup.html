@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - HDIMS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container-fluid px-0 main-container">
+        <!-- Top Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <i class="fas fa-heartbeat me-2"></i>HDIMS
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#features">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Registration Section -->
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0"><i class="fas fa-user-plus me-2"></i>Complete Your Registration</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>Please complete your profile information to continue.
+                            </div>
+                            
+                            <div id="profile-error" class="alert alert-danger d-none" role="alert"></div>
+                            
+                            <!-- Patient Registration Form -->
+                            <form id="patient-registration-form" class="needs-validation" novalidate>
+                                <h5 class="border-bottom pb-2 mb-4">Patient Information</h5>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="patient-name" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="patient-name" required>
+                                        <div class="invalid-feedback">Please provide your full name.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="patient-dob" class="form-label">Date of Birth</label>
+                                        <input type="date" class="form-control" id="patient-dob" required>
+                                        <div class="invalid-feedback">Please provide your date of birth.</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="patient-gender" class="form-label">Gender</label>
+                                        <select class="form-select" id="patient-gender" required>
+                                            <option value="" selected disabled>Select gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <div class="invalid-feedback">Please select your gender.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="patient-contact" class="form-label">Contact Number</label>
+                                        <input type="tel" class="form-control" id="patient-contact" required>
+                                        <div class="invalid-feedback">Please provide your contact number.</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="patient-address" class="form-label">Address</label>
+                                    <textarea class="form-control" id="patient-address" rows="3" required></textarea>
+                                    <div class="invalid-feedback">Please provide your address.</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="patient-history" class="form-label">Medical History (Optional)</label>
+                                    <textarea class="form-control" id="patient-history" rows="3"></textarea>
+                                    <div class="form-text">Share any relevant medical history, conditions, or allergies.</div>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Create Patient Profile</button>
+                                </div>
+                            </form>
+                            
+                            <!-- Doctor Registration Form -->
+                            <form id="doctor-registration-form" class="needs-validation d-none" novalidate>
+                                <h5 class="border-bottom pb-2 mb-4">Doctor Information</h5>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="doctor-name" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="doctor-name" required>
+                                        <div class="invalid-feedback">Please provide your full name.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="doctor-specialization" class="form-label">Specialization</label>
+                                        <select class="form-select" id="doctor-specialization" required>
+                                            <option value="" selected disabled>Select specialization</option>
+                                            <option value="Cardiology">Cardiology</option>
+                                            <option value="Dermatology">Dermatology</option>
+                                            <option value="Neurology">Neurology</option>
+                                            <option value="Orthopedics">Orthopedics</option>
+                                            <option value="Pediatrics">Pediatrics</option>
+                                            <option value="Psychiatry">Psychiatry</option>
+                                            <option value="Oncology">Oncology</option>
+                                            <option value="General Medicine">General Medicine</option>
+                                            <option value="Surgery">Surgery</option>
+                                            <option value="Gynecology">Gynecology</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        <div class="invalid-feedback">Please select your specialization.</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="doctor-contact" class="form-label">Contact Number</label>
+                                    <input type="tel" class="form-control" id="doctor-contact" required>
+                                    <div class="invalid-feedback">Please provide your contact number.</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="doctor-availability" class="form-label">Availability</label>
+                                    <textarea class="form-control" id="doctor-availability" rows="3" required></textarea>
+                                    <div class="form-text">Describe your regular working hours (e.g., "Monday-Friday: 9AM-5PM, Saturday: 9AM-1PM").</div>
+                                    <div class="invalid-feedback">Please provide your availability.</div>
+                                </div>
+                                
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>Doctor registrations require administrative approval before you can access the system.
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Submit for Approval</button>
+                                </div>
+                            </form>
+                            
+                            <!-- Admin Registration Form -->
+                            <form id="admin-registration-form" class="needs-validation d-none" novalidate>
+                                <h5 class="border-bottom pb-2 mb-4">Administrator Information</h5>
+                                
+                                <div class="alert alert-danger">
+                                    <i class="fas fa-exclamation-circle me-2"></i>Administrator accounts require verification and approval from existing administrators.
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="admin-name" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="admin-name" required>
+                                    <div class="invalid-feedback">Please provide your full name.</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="admin-position" class="form-label">Position</label>
+                                    <input type="text" class="form-control" id="admin-position" required>
+                                    <div class="invalid-feedback">Please provide your position.</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="admin-contact" class="form-label">Contact Number</label>
+                                    <input type="tel" class="form-control" id="admin-contact" required>
+                                    <div class="invalid-feedback">Please provide your contact number.</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="admin-verification-code" class="form-label">Administrator Verification Code</label>
+                                    <input type="text" class="form-control" id="admin-verification-code" required>
+                                    <div class="form-text">This code is provided by existing administrators.</div>
+                                    <div class="invalid-feedback">Please provide a valid verification code.</div>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Submit for Verification</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-light py-4 mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-heartbeat me-2"></i>HDIMS</h5>
+                        <p>A modern solution for healthcare data management.</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="index.html" class="text-light">Home</a></li>
+                            <li><a href="index.html#features" class="text-light">Features</a></li>
+                            <li><a href="index.html#about" class="text-light">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Contact</h5>
+                        <address>
+                            <i class="fas fa-map-marker-alt"></i> 123 Medical Center Dr<br>
+                            <i class="fas fa-phone"></i> (555) 123-4567<br>
+                            <i class="fas fa-envelope"></i> info@hdims.com
+                        </address>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <p>&copy; 2023 Health Data Information Management System. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for user role in URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const role = urlParams.get('role');
+            const uid = urlParams.get('uid');
+            const token = urlParams.get('token');
+            
+            if (!role || !uid || !token) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Store token in localStorage
+            localStorage.setItem('auth_token', token);
+            localStorage.setItem('user_id', uid);
+            localStorage.setItem('user_role', role);
+            
+            // Show the appropriate registration form based on role
+            if (role === 'patient') {
+                document.getElementById('patient-registration-form').classList.remove('d-none');
+                document.getElementById('doctor-registration-form').classList.add('d-none');
+                document.getElementById('admin-registration-form').classList.add('d-none');
+            } else if (role === 'doctor') {
+                document.getElementById('patient-registration-form').classList.add('d-none');
+                document.getElementById('doctor-registration-form').classList.remove('d-none');
+                document.getElementById('admin-registration-form').classList.add('d-none');
+            } else if (role === 'admin') {
+                document.getElementById('patient-registration-form').classList.add('d-none');
+                document.getElementById('doctor-registration-form').classList.add('d-none');
+                document.getElementById('admin-registration-form').classList.remove('d-none');
+            }
+            
+            // Setup form submission for patient
+            document.getElementById('patient-registration-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                completePatientRegistration();
+            });
+            
+            // Setup form submission for doctor
+            document.getElementById('doctor-registration-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                completeDoctorRegistration();
+            });
+            
+            // Setup form submission for admin
+            document.getElementById('admin-registration-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                completeAdminRegistration();
+            });
+        });
+
+        function completePatientRegistration() {
+            const patientData = {
+                name: document.getElementById('patient-name').value,
+                dob: document.getElementById('patient-dob').value,
+                gender: document.getElementById('patient-gender').value,
+                contact: document.getElementById('patient-contact').value,
+                address: document.getElementById('patient-address').value,
+                history: document.getElementById('patient-history').value || '',
+                email: localStorage.getItem('user_email') || ''
+            };
+            
+            const errorElement = document.getElementById('profile-error');
+            errorElement.classList.add('d-none');
+            
+            fetch('/api/patients/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
+                },
+                body: JSON.stringify(patientData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message && data.message.includes('successfully')) {
+                    localStorage.setItem('patient_id', data.patient_id);
+                    window.location.href = 'dashboard_patient.html';
+                } else {
+                    errorElement.textContent = data.message || 'An error occurred during registration.';
+                    errorElement.classList.remove('d-none');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorElement.textContent = 'An error occurred during registration. Please try again.';
+                errorElement.classList.remove('d-none');
+            });
+        }
+
+        function completeDoctorRegistration() {
+            const doctorData = {
+                name: document.getElementById('doctor-name').value,
+                specialization: document.getElementById('doctor-specialization').value,
+                contact: document.getElementById('doctor-contact').value,
+                availability: document.getElementById('doctor-availability').value,
+                email: localStorage.getItem('user_email') || ''
+            };
+            
+            const errorElement = document.getElementById('profile-error');
+            errorElement.classList.add('d-none');
+            
+            // For doctors, we'd typically submit to an admin approval route
+            // For now, we'll just use the doctor registration endpoint
+            fetch('/api/doctors/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
+                },
+                body: JSON.stringify(doctorData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message && data.message.includes('successfully')) {
+                    localStorage.setItem('doctor_id', data.doctor_id);
+                    window.location.href = 'dashboard_doctor.html';
+                } else {
+                    errorElement.textContent = data.message || 'An error occurred during registration.';
+                    errorElement.classList.remove('d-none');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorElement.textContent = 'An error occurred during registration. Please try again.';
+                errorElement.classList.remove('d-none');
+            });
+        }
+
+        function completeAdminRegistration() {
+            const adminData = {
+                name: document.getElementById('admin-name').value,
+                position: document.getElementById('admin-position').value,
+                contact: document.getElementById('admin-contact').value,
+                verification_code: document.getElementById('admin-verification-code').value
+            };
+            
+            const errorElement = document.getElementById('profile-error');
+            errorElement.classList.add('d-none');
+            
+            // Admin registration would typically go through a special verification process
+            // For simplicity in this demo, we'll just redirect to the admin dashboard
+            errorElement.textContent = 'Admin verification submitted. Pending approval.';
+            errorElement.classList.remove('d-none');
+            errorElement.classList.remove('alert-danger');
+            errorElement.classList.add('alert-success');
+            
+            // In a real system, this would communicate with an admin verification endpoint
+            setTimeout(() => {
+                window.location.href = 'dashboard_admin.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

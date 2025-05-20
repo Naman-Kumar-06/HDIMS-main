@@ -1,0 +1,167 @@
+You are a development assistant helping me build a full-stack Health Data Information & Management System (HDIMS). Use Python (Flask or FastAPI) for the backend, mock Firebase authentication, MySQL (via XAMPP) as the database, and HTML/CSS/JS for the frontend. Follow these structured steps to build the system module-by-module.
+
+🔁 STEP 1: Project Initialization
+Set up a project structure with:
+
+bash
+Copy
+Edit
+/backend
+  /auth
+  /routes
+  /db
+  /dsa
+  /utils
+  .env
+  main.py
+/frontend
+  index.html
+  signup.html
+  dashboard_patient.html
+  dashboard_doctor.html
+  dashboard_admin.html
+  /js
+  /css
+README.md
+Install required Python packages in requirements.txt:
+
+Flask or FastAPI
+
+python-dotenv
+
+mysql-connector-python
+
+PyJWT
+
+flask-cors (if using Flask)
+
+🔁 STEP 2: Mock Firebase Authentication System
+In /auth/, build:
+
+signup() route: saves user in users table (uid, email, password hash, role).
+
+login() route: verifies credentials, returns JWT with UID.
+
+verify_token() utility: middleware to decode/validate JWT and check expiration.
+
+Use PyJWT to generate mock Firebase-like tokens:
+
+Include UID, issued time, expiration (e.g., 15 minutes)
+
+🔁 STEP 3: MySQL Integration (via XAMPP)
+Create a MySQL connector in /db/mysql.py:
+
+Connect using credentials stored in .env
+
+Provide functions for execute_query() and fetch_results()
+
+Tables:
+
+users(uid, email, password_hash, role)
+
+patients(patient_id, uid, name, history)
+
+doctors(doctor_id, name, specialization, availability)
+
+appointments(id, patient_id, doctor_id, time, urgency, status)
+
+performance_metrics(hospital_id, doctor_id, avg_response_time, satisfaction_score)
+
+🔁 STEP 4: Role-Based Middleware
+In /utils/, implement a middleware or decorator that:
+
+Verifies JWT token on each API request
+
+Extracts UID and fetches role from users table
+
+Restricts access to APIs based on role (Patient, Doctor, Admin)
+
+🔁 STEP 5: Core REST Endpoints (in /routes/)
+/appointments/book: Patients book appointments
+
+/doctors/available: Return list of doctors with availability
+
+/patients/search: Return autocomplete results using Trie
+
+/admin/generate_report: Admin-level analytics
+
+Each endpoint should:
+
+Parse request with token
+
+Validate user role
+
+Interact with database or algorithm module
+
+🔁 STEP 6: DSA Utility Modules (in /dsa/)
+trie.py: Autocomplete for patient/disease search
+
+minheap.py: Urgency-based appointment scheduling
+
+maxheap.py: Find most available doctor
+
+graph.py: Doctor referrals and disease tracking
+
+segment_tree.py: Performance metrics over time ranges
+
+Make them usable from API endpoints.
+
+🔁 STEP 7: Frontend (HTML/CSS/JS)
+Pages:
+
+index.html: Login screen
+
+signup.html: Register screen
+
+dashboard_patient.html
+
+dashboard_doctor.html
+
+dashboard_admin.html
+
+JS:
+
+Handle login/signup using fetch() to backend
+
+Store JWT token in localStorage
+
+Attach token in Authorization header on every API call
+
+Redirect user to correct dashboard based on role
+
+🔁 STEP 8: Final Setup and Testing
+Add CORS support in the backend
+
+Use Postman or JS fetch calls to test each endpoint
+
+Check DB data via phpMyAdmin (XAMPP)
+
+Add usage instructions in README.md:
+
+How to run backend
+
+How to set up MySQL
+
+How to test frontend
+
+🔁 STEP 9: Bonus Features (Optional)
+Allow appointment cancellation or rescheduling
+
+Enable doctor search by specialization
+
+Add charts to admin reports using Chart.js
+
+Add unit tests for DSA modules
+
+✅ Expected Output
+Functional multi-role web app with mock Firebase login
+
+Secure token-based API access
+
+MySQL-backed data storage
+
+Intelligent scheduling/search/reporting via DSA
+
+Clean modular Python code with reusable components
+
+👉 Start with Step 1, and guide me step-by-step. Ask me what part I want to build next after each module is complete.

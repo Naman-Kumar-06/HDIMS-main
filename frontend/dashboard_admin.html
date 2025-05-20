@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - HDIMS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar bg-dark">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-heartbeat me-2"></i>HDIMS</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="sidebar-user-info">
+                    <div class="user-info">
+                        <img id="user-avatar" src="https://via.placeholder.com/50" class="rounded-circle" alt="User">
+                        <div>
+                            <h6 id="user-name">Loading...</h6>
+                            <span class="badge bg-danger">Administrator</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="active">
+                    <a href="#dashboard-section" data-section="dashboard-section">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#users-section" data-section="users-section">
+                        <i class="fas fa-users me-2"></i>User Management
+                    </a>
+                </li>
+                <li>
+                    <a href="#doctors-section" data-section="doctors-section">
+                        <i class="fas fa-user-md me-2"></i>Doctors
+                    </a>
+                </li>
+                <li>
+                    <a href="#patients-section" data-section="patients-section">
+                        <i class="fas fa-user-injured me-2"></i>Patients
+                    </a>
+                </li>
+                <li>
+                    <a href="#appointments-section" data-section="appointments-section">
+                        <i class="fas fa-calendar-check me-2"></i>Appointments
+                    </a>
+                </li>
+                <li>
+                    <a href="#reports-section" data-section="reports-section">
+                        <i class="fas fa-chart-bar me-2"></i>Reports & Analytics
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings-section" data-section="settings-section">
+                        <i class="fas fa-cog me-2"></i>System Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="logout-btn">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <span class="navbar-text ms-auto">
+                        <i class="fas fa-bell me-3 notification-icon"></i>
+                        <span id="current-date">Loading date...</span>
+                    </span>
+                </div>
+            </nav>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="container-fluid">
+                    <h2 class="section-title">Administrator Dashboard</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card mb-4 widget-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title text-muted">Total Patients</h6>
+                                            <h2 id="total-patients" class="mb-0">-</h2>
+                                        </div>
+                                        <div class="widget-icon text-info">
+                                            <i class="fas fa-user-injured fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#patients-section" class="stretched-link" data-section="patients-section"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card mb-4 widget-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title text-muted">Total Doctors</h6>
+                                            <h2 id="total-doctors" class="mb-0">-</h2>
+                                        </div>
+                                        <div class="widget-icon text-primary">
+                                            <i class="fas fa-user-md fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#doctors-section" class="stretched-link" data-section="doctors-section"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card mb-4 widget-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title text-muted">Appointments Today</h6>
+                                            <h2 id="appointments-today" class="mb-0">-</h2>
+                                        </div>
+                                        <div class="widget-icon text-success">
+                                            <i class="fas fa-calendar-day fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#appointments-section" class="stretched-link" data-section="appointments-section"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card mb-4 widget-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title text-muted">System Users</h6>
+                                            <h2 id="total-users" class="mb-0">-</h2>
+                                        </div>
+                                        <div class="widget-icon text-warning">
+                                            <i class="fas fa-users fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#users-section" class="stretched-link" data-section="users-section"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Hospital Activity</h5>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary active" id="weekly-chart">Week</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="monthly-chart">Month</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="hospitalActivityChart" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Doctor Performance</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="doctorPerformanceChart" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Recent Appointments</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Patient</th>
+                                                    <th>Doctor</th>
+                                                    <th>Time</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="recent-appointments">
+                                                <tr>
+                                                    <td colspan="4" class="text-center">Loading appointments...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="text-center mt-2">
+                                        <a href="#appointments-section" class="btn btn-sm btn-outline-primary" data-section="appointments-section">View All Appointments</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Specialization Distribution</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="specializationChart" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Management Section -->
+            <section id="users-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">User Management</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">System Users</h5>
+                                    <button class="btn btn-primary btn-sm" id="add-user-btn">
+                                        <i class="fas fa-plus me-1"></i> Add New User
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3 row">
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search users..." id="user-search">
+                                                <button class="btn btn-primary" type="button" id="search-user-btn">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <select class="form-select" id="role-filter">
+                                                <option value="">All Roles</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="doctor">Doctor</option>
+                                                <option value="patient">Patient</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>User ID</th>
+                                                    <th>Email</th>
+                                                    <th>Role</th>
+                                                    <th>Created</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="users-table">
+                                                <tr>
+                                                    <td colspan="6" class="text-center">Loading users...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav aria-label="User pagination">
+                                            <ul class="pagination justify-content-center" id="user-pagination">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add/Edit User Form (initially hidden) -->
+                    <div class="row mb-4 d-none" id="user-form-container">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0" id="user-form-title">Add New User</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="user-form">
+                                        <input type="hidden" id="user-id">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="user-email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="user-email" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="user-role" class="form-label">Role</label>
+                                                <select class="form-select" id="user-role" required>
+                                                    <option value="" selected disabled>Select role</option>
+                                                    <option value="admin">Administrator</option>
+                                                    <option value="doctor">Doctor</option>
+                                                    <option value="patient">Patient</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="user-password" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="user-password">
+                                                <div class="form-text" id="password-help">Leave blank to keep current password when editing.</div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="user-confirm-password" class="form-label">Confirm Password</label>
+                                                <input type="password" class="form-control" id="user-confirm-password">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary" id="cancel-user-btn">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Save User</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Doctors Section -->
+            <section id="doctors-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">Doctor Management</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Doctors Directory</h5>
+                                    <button class="btn btn-primary btn-sm" id="add-doctor-btn">
+                                        <i class="fas fa-plus me-1"></i> Register New Doctor
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3 row">
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search doctors..." id="doctor-search">
+                                                <button class="btn btn-primary" type="button" id="search-doctor-btn">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <select class="form-select" id="specialization-filter">
+                                                <option value="">All Specializations</option>
+                                                <option value="Cardiology">Cardiology</option>
+                                                <option value="Dermatology">Dermatology</option>
+                                                <option value="Neurology">Neurology</option>
+                                                <option value="Orthopedics">Orthopedics</option>
+                                                <option value="Pediatrics">Pediatrics</option>
+                                                <option value="Psychiatry">Psychiatry</option>
+                                                <option value="Oncology">Oncology</option>
+                                                <option value="General Medicine">General Medicine</option>
+                                                <option value="Surgery">Surgery</option>
+                                                <option value="Gynecology">Gynecology</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Specialization</th>
+                                                    <th>Contact</th>
+                                                    <th>Availability</th>
+                                                    <th>Satisfaction</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="doctors-table">
+                                                <tr>
+                                                    <td colspan="7" class="text-center">Loading doctors...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Doctor Registration Form (initially hidden) -->
+                    <div class="row mb-4 d-none" id="doctor-form-container">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0" id="doctor-form-title">Register New Doctor</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="doctor-form">
+                                        <input type="hidden" id="doctor-id">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="doctor-name" class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" id="doctor-name" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="doctor-email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="doctor-email" required>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="doctor-specialization" class="form-label">Specialization</label>
+                                                <select class="form-select" id="doctor-specialization" required>
+                                                    <option value="" selected disabled>Select specialization</option>
+                                                    <option value="Cardiology">Cardiology</option>
+                                                    <option value="Dermatology">Dermatology</option>
+                                                    <option value="Neurology">Neurology</option>
+                                                    <option value="Orthopedics">Orthopedics</option>
+                                                    <option value="Pediatrics">Pediatrics</option>
+                                                    <option value="Psychiatry">Psychiatry</option>
+                                                    <option value="Oncology">Oncology</option>
+                                                    <option value="General Medicine">General Medicine</option>
+                                                    <option value="Surgery">Surgery</option>
+                                                    <option value="Gynecology">Gynecology</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="doctor-contact" class="form-label">Contact Number</label>
+                                                <input type="tel" class="form-control" id="doctor-contact" required>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="doctor-availability" class="form-label">Availability</label>
+                                            <textarea class="form-control" id="doctor-availability" rows="3" required placeholder="e.g., Monday-Friday: 9AM-5PM, Saturday: 9AM-1PM"></textarea>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="doctor-password" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="doctor-password">
+                                                <div class="form-text" id="doctor-password-help">Leave blank to keep current password when editing.</div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="doctor-confirm-password" class="form-label">Confirm Password</label>
+                                                <input type="password" class="form-control" id="doctor-confirm-password">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn btn-secondary" id="cancel-doctor-form-btn">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Save Doctor</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Doctor Performance Metrics -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Update Doctor Performance Metrics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="performance-form" class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="performance-doctor" class="form-label">Select Doctor</label>
+                                            <select class="form-select" id="performance-doctor" required>
+                                                <option value="" selected disabled>Choose a doctor</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="performance-date" class="form-label">Date</label>
+                                            <input type="date" class="form-control" id="performance-date" required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="performance-response-time" class="form-label">Avg. Response (min)</label>
+                                            <input type="number" class="form-control" id="performance-response-time" min="0" step="0.1" required>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label for="performance-patients" class="form-label">Patients</label>
+                                            <input type="number" class="form-control" id="performance-patients" min="0" required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="performance-satisfaction" class="form-label">Satisfaction (0-5)</label>
+                                            <input type="number" class="form-control" id="performance-satisfaction" min="0" max="5" step="0.1" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">Update Metrics</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patients Section -->
+            <section id="patients-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">Patient Management</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Patients Directory</h5>
+                                    <div class="input-group" style="max-width: 300px;">
+                                        <input type="text" class="form-control" placeholder="Search patients..." id="patient-search">
+                                        <button class="btn btn-primary" type="button" id="search-patient-btn">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Gender</th>
+                                                    <th>DOB</th>
+                                                    <th>Contact</th>
+                                                    <th>Appointments</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="patients-table">
+                                                <tr>
+                                                    <td colspan="7" class="text-center">Loading patients...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <nav aria-label="Patient pagination">
+                                            <ul class="pagination justify-content-center" id="patient-pagination">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Patient Demographics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="demographicsChart" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Patient Registration Trend</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="registrationTrendChart" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+            <section id="appointments-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">Appointment Management</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Appointment Calendar</h5>
+                                    <div>
+                                        <button class="btn btn-outline-primary me-1" id="prev-week-admin">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <span id="current-week-range-admin">Loading...</span>
+                                        <button class="btn btn-outline-primary ms-1" id="next-week-admin">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered appointment-calendar">
+                                            <thead>
+                                                <tr id="calendar-header-admin">
+                                                    <th class="text-center" style="width: 8%">Time</th>
+                                                    <th class="text-center">Monday</th>
+                                                    <th class="text-center">Tuesday</th>
+                                                    <th class="text-center">Wednesday</th>
+                                                    <th class="text-center">Thursday</th>
+                                                    <th class="text-center">Friday</th>
+                                                    <th class="text-center">Saturday</th>
+                                                    <th class="text-center">Sunday</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="calendar-body-admin">
+                                                <tr>
+                                                    <td colspan="8" class="text-center py-4">Loading calendar...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs" id="appointment-tabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">All</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="scheduled-tab" data-bs-toggle="tab" data-bs-target="#scheduled" type="button" role="tab" aria-controls="scheduled" aria-selected="false">Scheduled</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed" type="button" role="tab" aria-controls="completed" aria-selected="false">Completed</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="cancelled-tab" data-bs-toggle="tab" data-bs-target="#cancelled" type="button" role="tab" aria-controls="cancelled" aria-selected="false">Cancelled</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3 row">
+                                        <div class="col-md-3">
+                                            <input type="date" class="form-control" id="appointment-date-filter">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <select class="form-select" id="appointment-doctor-filter">
+                                                <option value="">All Doctors</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary w-100" id="apply-appointment-filter">
+                                                <i class="fas fa-filter me-1"></i> Apply Filters
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-outline-secondary w-100" id="clear-appointment-filter">
+                                                <i class="fas fa-times me-1"></i> Clear Filters
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="appointmentTabContent">
+                                        <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Date & Time</th>
+                                                            <th>Patient</th>
+                                                            <th>Doctor</th>
+                                                            <th>Reason</th>
+                                                            <th>Status</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="all-appointments">
+                                                        <tr>
+                                                            <td colspan="7" class="text-center">Loading appointments...</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="scheduled" role="tabpanel" aria-labelledby="scheduled-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Date & Time</th>
+                                                            <th>Patient</th>
+                                                            <th>Doctor</th>
+                                                            <th>Reason</th>
+                                                            <th>Urgency</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="scheduled-appointments-admin">
+                                                        <tr>
+                                                            <td colspan="7" class="text-center">Loading appointments...</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Date & Time</th>
+                                                            <th>Patient</th>
+                                                            <th>Doctor</th>
+                                                            <th>Reason</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="completed-appointments-admin">
+                                                        <tr>
+                                                            <td colspan="6" class="text-center">Loading appointments...</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Date & Time</th>
+                                                            <th>Patient</th>
+                                                            <th>Doctor</th>
+                                                            <th>Reason</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="cancelled-appointments-admin">
+                                                        <tr>
+                                                            <td colspan="6" class="text-center">Loading appointments...</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports & Analytics Section -->
+            <section id="reports-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">Reports & Analytics</h2>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Generate Reports</h5>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary active" id="general-report-btn">General</button>
+                                        <button type="button" class="btn btn-primary" id="doctor-report-btn">Doctor</button>
+                                        <button type="button" class="btn btn-primary" id="appointment-report-btn">Appointments</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="report-period" class="form-label">Time Period</label>
+                                            <select class="form-select" id="report-period">
+                                                <option value="7">Last 7 days</option>
+                                                <option value="30" selected>Last 30 days</option>
+                                                <option value="90">Last 3 months</option>
+                                                <option value="180">Last 6 months</option>
+                                                <option value="365">Last year</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 d-flex align-items-end">
+                                            <button class="btn btn-primary" id="generate-report-btn">
+                                                <i class="fas fa-chart-bar me-1"></i> Generate Report
+                                            </button>
+                                            <button class="btn btn-outline-secondary ms-2" id="export-report-btn">
+                                                <i class="fas fa-download me-1"></i> Export
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Report results -->
+                    <div id="report-container">
+                        <!-- General Report -->
+                        <div id="general-report" class="report-section active">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Hospital Overview</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row text-center">
+                                                <div class="col-md-3">
+                                                    <h2 id="report-total-patients">-</h2>
+                                                    <p class="text-muted">Total Patients</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h2 id="report-total-doctors">-</h2>
+                                                    <p class="text-muted">Total Doctors</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h2 id="report-total-appointments">-</h2>
+                                                    <p class="text-muted">Total Appointments</p>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h2 id="report-satisfaction">-</h2>
+                                                    <p class="text-muted">Avg. Satisfaction</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Recent Appointments</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="reportAppointmentChart" height="200"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Doctor Specializations</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="reportSpecializationChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Performance Metrics</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="reportPerformanceChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Doctor Report -->
+                        <div id="doctor-report" class="report-section d-none">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Doctor Performance Comparison</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Doctor</th>
+                                                            <th>Specialization</th>
+                                                            <th>Avg. Response Time</th>
+                                                            <th>Satisfaction Score</th>
+                                                            <th>Total Patients</th>
+                                                            <th>Completion Rate</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="doctor-performance-table">
+                                                        <tr>
+                                                            <td colspan="6" class="text-center">Loading doctor performance data...</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Average Response Time</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="doctorResponseChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Patient Satisfaction Rating</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="doctorSatisfactionChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Appointment Report -->
+                        <div id="appointment-report" class="report-section d-none">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Appointment Statistics</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row text-center">
+                                                <div class="col-md-4">
+                                                    <h2 id="appointment-total">-</h2>
+                                                    <p class="text-muted">Total Appointments</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h2 id="appointment-completion-rate">-%</h2>
+                                                    <p class="text-muted">Completion Rate</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div>
+                                                        <h4 id="max-day-date">-</h4>
+                                                        <h5 id="max-day-count">-</h5>
+                                                    </div>
+                                                    <p class="text-muted">Busiest Day</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Daily Appointment Trend</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="dailyAppointmentChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Urgency Distribution</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="urgencyDistributionChart" height="250"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Daily Statistics</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Total</th>
+                                                            <th>Completed</th>
+                                                            <th>Cancelled</th>
+                                                            <th>Completion Rate</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="daily-stats-table">
+                                                        <tr>
+                                                            <td colspan="5" class="text-center">Loading daily statistics...</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- System Settings Section -->
+            <section id="settings-section" class="content-section">
+                <div class="container-fluid">
+                    <h2 class="section-title">System Settings</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">General Settings</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="general-settings-form">
+                                        <div class="mb-3">
+                                            <label for="hospital-name" class="form-label">Hospital Name</label>
+                                            <input type="text" class="form-control" id="hospital-name" value="Health Data Information Management System">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="hospital-contact" class="form-label">Contact Number</label>
+                                            <input type="tel" class="form-control" id="hospital-contact" value="(555) 123-4567">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="hospital-email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="hospital-email" value="info@hdims.com">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="hospital-address" class="form-label">Address</label>
+                                            <textarea class="form-control" id="hospital-address" rows="3">123 Medical Center Dr</textarea>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary">Save Settings</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Email Settings</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="email-settings-form">
+                                        <div class="mb-3">
+                                            <label for="smtp-server" class="form-label">SMTP Server</label>
+                                            <input type="text" class="form-control" id="smtp-server">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="smtp-port" class="form-label">SMTP Port</label>
+                                            <input type="number" class="form-control" id="smtp-port">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="smtp-username" class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="smtp-username">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="smtp-password" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="smtp-password">
+                                        </div>
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary">Save Settings</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">System Backup & Maintenance</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Database Backup</h5>
+                                                    <p class="card-text">Create a backup of the system database.</p>
+                                                    <button class="btn btn-primary" id="backup-btn">Create Backup</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">System Logs</h5>
+                                                    <p class="card-text">View and download system logs for troubleshooting.</p>
+                                                    <button class="btn btn-primary" id="logs-btn">View Logs</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modal for Appointment Details -->
+    <div class="modal fade" id="appointmentDetailModal" tabindex="-1" aria-labelledby="appointmentDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="appointmentDetailModalLabel">Appointment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="appointment-detail-content">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Loading appointment details...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="admin-complete-appointment-btn">Mark as Completed</button>
+                    <button type="button" class="btn btn-danger" id="admin-cancel-appointment-btn">Cancel Appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Patient Details -->
+    <div class="modal fade" id="patientDetailModal" tabindex="-1" aria-labelledby="patientDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="patientDetailModalLabel">Patient Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="patient-detail-content">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Loading patient details...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="edit-patient-btn">Edit Patient</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Doctor Details -->
+    <div class="modal fade" id="doctorDetailModal" tabindex="-1" aria-labelledby="doctorDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="doctorDetailModalLabel">Doctor Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="doctor-detail-content">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Loading doctor details...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="edit-doctor-btn">Edit Doctor</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDIMS - Health Data Information Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container-fluid px-0 main-container">
+        <!-- Top Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-heartbeat me-2"></i>HDIMS
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#features">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Login Section -->
+        <div class="container">
+            <div class="row align-items-center justify-content-center min-vh-75">
+                <div class="col-md-6">
+                    <div class="p-4 text-center">
+                        <h1 class="display-4 mb-4">Health Data Information & Management System</h1>
+                        <p class="lead mb-5">A secure platform for managing healthcare data, appointments, and patient information</p>
+                        <img src="https://pixabay.com/get/g66e2b49bd01f38e86baca83ed8746e65ec4362edccd12027f13f52c2ad53b023575fbbf9a86a76045b731703fdda077c59509ddbc674933ba93917ce1e6e557c_1280.jpg" class="img-fluid rounded shadow-lg mb-4" alt="Medical Dashboard">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow login-card">
+                        <div class="card-header bg-primary text-white">
+                            <ul class="nav nav-pills card-header-pills" id="loginTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false">Sign Up</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="loginTabsContent">
+                                <!-- Login Form -->
+                                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                                    <div id="login-error" class="alert alert-danger d-none" role="alert"></div>
+                                    <form id="login-form">
+                                        <div class="mb-3">
+                                            <label for="login-email" class="form-label">Email address</label>
+                                            <input type="email" class="form-control" id="login-email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="login-password" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="login-password" required>
+                                        </div>
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input" id="remember-me">
+                                            <label class="form-check-label" for="remember-me">Remember me</label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                                    </form>
+                                </div>
+                                
+                                <!-- Sign Up Form -->
+                                <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                                    <div id="signup-error" class="alert alert-danger d-none" role="alert"></div>
+                                    <form id="signup-form">
+                                        <div class="mb-3">
+                                            <label for="signup-email" class="form-label">Email address</label>
+                                            <input type="email" class="form-control" id="signup-email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="signup-password" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="signup-password" required>
+                                            <div class="form-text">Password must be at least 8 characters with numbers and letters.</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="confirm-password" class="form-label">Confirm Password</label>
+                                            <input type="password" class="form-control" id="confirm-password" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="role" class="form-label">Role</label>
+                                            <select class="form-select" id="role" required>
+                                                <option value="patient">Patient</option>
+                                                <option value="doctor">Doctor</option>
+                                                <option value="admin">Administrator</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section id="features" class="py-5 bg-light text-dark">
+            <div class="container">
+                <h2 class="text-center mb-5">Key Features</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-calendar-check fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Appointment Management</h5>
+                                <p class="card-text">Book, reschedule, and cancel appointments with ease. Smart scheduling based on urgency and doctor availability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-user-md fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Doctor Directory</h5>
+                                <p class="card-text">Find the right specialist for your needs. Search by specialty, availability, and satisfaction ratings.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Performance Analytics</h5>
+                                <p class="card-text">Comprehensive reports for administrators to monitor hospital performance and resource allocation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h2 class="mb-4">About HDIMS</h2>
+                        <p class="lead">Our Health Data Information Management System streamlines healthcare delivery with cutting-edge technology.</p>
+                        <p>HDIMS provides a complete solution for healthcare facilities to manage patient information, appointments, and performance metrics in one secure platform. With role-based access control, the system caters to the specific needs of patients, doctors, and administrators.</p>
+                        <p>Built with modern technologies and advanced data structures, HDIMS ensures efficient data retrieval and intelligent scheduling to optimize healthcare delivery.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="https://pixabay.com/get/g8daf2b419f2c0c0f1f9ac713e7e31283eab8b5399a5d4ad17a08cc9fbac7e01cb5e3272757cd8e7883df8b6d1196ed96cbc8a0830c0bd190ed871b168e4e5ef7_1280.jpg" class="img-fluid rounded shadow" alt="Healthcare professionals">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-light py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-heartbeat me-2"></i>HDIMS</h5>
+                        <p>A modern solution for healthcare data management.</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light">Home</a></li>
+                            <li><a href="#features" class="text-light">Features</a></li>
+                            <li><a href="#about" class="text-light">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3" id="contact">
+                        <h5>Contact</h5>
+                        <address>
+                            <i class="fas fa-map-marker-alt"></i> 123 Medical Center Dr<br>
+                            <i class="fas fa-phone"></i> (555) 123-4567<br>
+                            <i class="fas fa-envelope"></i> info@hdims.com
+                        </address>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <p>&copy; 2023 Health Data Information Management System. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/auth.js"></script>
+</body>
+</html>
